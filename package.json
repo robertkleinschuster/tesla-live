@@ -13,6 +13,9 @@
     "start": "npm run build && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "browserslist": [
+    "since 2017-06"
+  ],
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.1.2",
     "parcel-bundler": "^1.12.4",
@@ -25,6 +28,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "axios": "^0.19.2",
+    "js": "^0.1.0",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
     "vuex": "^3.5.1"

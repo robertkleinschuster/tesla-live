@@ -131,12 +131,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import {library} from '@fortawesome/fontawesome-svg-core';
   import {faBolt} from "@fortawesome/free-solid-svg-icons";
   import {faTachometerAlt} from "@fortawesome/free-solid-svg-icons";
   import {faRoute} from "@fortawesome/free-solid-svg-icons";
   import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
+  import {mapActions, mapGetters} from "vuex";
 
   library.add(faBolt)
   library.add(faTachometerAlt)
@@ -145,6 +146,13 @@
 
   export default {
     name: "MainContent",
+    methods: {
+      ...mapActions(["fetchVehicleData"]),
+    },
+    computed: mapGetters(['vehicleData']),
+    created() {
+      this.fetchVehicleData();
+    },
     data: function () {
       return {
         batteryPercent: 30,
@@ -158,7 +166,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   #content {
     margin: 20px 20px 0;
   }
