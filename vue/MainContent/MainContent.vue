@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="content">
+    <h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1>
     <div class="row">
       <div class="column" id="current-data">
         <div class="row">
@@ -8,7 +9,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'route']"></font-awesome-icon>
-            {{ odometer }}
+            {{ vehicleData.odometer }}
           </div>
         </div>
 

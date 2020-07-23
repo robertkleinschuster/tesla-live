@@ -10,6 +10,6 @@ library.add(faUserSecret)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
-  render: createElement => createElement(App),
-  store: store
+  store: store,
+  render: createElement => createElement(App)
 }).$mount('#app');
