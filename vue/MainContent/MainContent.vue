@@ -11,7 +11,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'route']"></font-awesome-icon>
-            {{ vehicleData.odometer }}
+            {{ vehicleData.odometer | units('mi', 'km', false) | round(0) | numFormat }} km
           </div>
         </div>
 
@@ -20,11 +20,7 @@
             Reichweite:
           </div>
           <div class="column">
-            <div class="battery">
-              <div :style="{ width: vehicleData.batteryPercent * 1.5 + 'px' }" class="battery-level">
-                <div class="battery-label">{{ vehicleData.batteryRange }}</div>
-              </div>
-            </div>
+            <Battery></Battery>
           </div>
         </div>
 
@@ -34,7 +30,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'tachometer-alt']"></font-awesome-icon>
-            {{ vehicleData.speed }}
+            {{ vehicleData.speed | units('mi', 'km', false) | round(0) | numFormat }} km/h
           </div>
         </div>
         <div class="row">
@@ -43,7 +39,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'bolt']"></font-awesome-icon>
-            {{ vehicleData.power }}
+            {{ vehicleData.power | round(0) }} kW
           </div>
         </div>
         <div class="row">
@@ -54,24 +50,24 @@
                 <td>Status:</td>
                 <td id="vehicle_state">{{ vehicleData.onlineState }}</td>
               </tr>
-              <tr>
+              <tr v-if="vehicleData.chargeState">
                 <td>Ladestatus:</td>
                 <td id="charging_state">{{ vehicleData.chargeState }}</td>
               </tr>
-              <tr id="charge_rate">
+              <tr id="charge_rate" v-if="vehicleData.chargeRate">
                 <td>Lädt:</td>
-                <td>{{ vehicleData.chargeRate }}</td>
+                <td>{{ vehicleData.chargeRate | units('mi', 'km', false) | round(0) | numFormat}} km/h</td>
 
               </tr>
-              <tr>
+              <tr v-if="vehicleData.chargePower">
                 <td>Ladeleistung:</td>
-                <td id="charger_power">{{ vehicleData.chargePower }}</td>
+                <td id="charger_power">{{ vehicleData.chargePower | round(0)}} kW</td>
               </tr>
-              <tr>
+              <tr v-if="vehicleData.outsideTemp">
                 <td>Außentemperatur:</td>
                 <td id="outside_temp">{{ vehicleData.outsideTemp }}</td>
               </tr>
-              <tr>
+              <tr v-if="vehicleData.insideTemp">
                 <td>Innentemperatur:</td>
                 <td id="inside_temp">{{ vehicleData.insideTemp }}</td>
               </tr>
@@ -96,9 +92,9 @@
                 <td>{{ vehicleData.fastChargerType }}</td>
               </tr>
 
-              <tr id="time_to_full_charge">
+              <tr id="time_to_full_charge" v-if="vehicleData.fullyChargedIn">
                 <td>Voll geladen in:</td>
-                <td>{{ vehicleData.fullyChargedIn }}</td>
+                <td>{{ vehicleData.fullyChargedIn }} min</td>
               </tr>
               </tbody>
             </table>
@@ -132,6 +128,7 @@
   import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
   import {mapActions, mapGetters} from "vuex";
   import ErrorMessage from "./ErrorMessage.vue";
+  import Battery from "./Battery.vue";
 
   library.add(faBolt)
   library.add(faTachometerAlt)
@@ -140,7 +137,7 @@
 
   export default {
     name: "MainContent",
-    components: {ErrorMessage},
+    components: {Battery, ErrorMessage},
     methods: {
       ...mapActions(["fetchVehicleData"]),
     },
@@ -150,16 +147,6 @@
       setInterval(function () {
         this.fetchVehicleData();
       }.bind(this), 10000);
-    },
-    data: function () {
-      return {
-        batteryPercent: 30,
-        odometer: "",
-        availableRange: "",
-        currentSpeed: "",
-        currentWattage: "",
-
-      }
     }
   }
 </script>

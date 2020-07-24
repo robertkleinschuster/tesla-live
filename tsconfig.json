@@ -12,6 +12,9 @@
       "esnext.asynciterable"
     ]
   },
+  "include": [
+    "./vue-shims.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

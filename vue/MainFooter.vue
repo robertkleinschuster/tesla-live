@@ -2,21 +2,18 @@
   <footer>
     <div class="row">
       <div id="last-refresh" class="column">
-        {{ lastUpdateLabel }} {{ lastUpdate }}
+        Aktualisiert: {{ new Date(vehicleData.lastUpdate) | dateFormat('DD.MM.YYYY hh:mm:ss') }}
       </div>
     </div>
   </footer>
 </template>
 
 <script lang="ts">
+  import {mapGetters} from "vuex";
+
   export default {
     name: "MainFooter",
-    data: function () {
-      return {
-        lastUpdateLabel: "Aktualisiert:",
-        lastUpdate: "",
-      }
-    }
+    computed: mapGetters(['vehicleData']),
   }
 </script>
 

@@ -1,10 +1,18 @@
 <template>
-
+  <div class="battery">
+    <div :style="{ width: vehicleData.batteryPercent * 1.5 + 'px' }" class="battery-level">
+      <div class="battery-label">{{ vehicleData.batteryRange | units('mi', 'km', false) | round(0) | numFormat}} km</div>
+    </div>
+  </div>
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
-    name: "Battery"
+    name: "Battery",
+    computed: mapGetters(['vehicleData']),
+
   }
 </script>
 

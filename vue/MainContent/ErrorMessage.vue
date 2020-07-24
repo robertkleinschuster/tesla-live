@@ -1,16 +1,16 @@
-<template>
+<template lang="html">
 <div>
   Fehler
 </div>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     name: "ErrorMessage"
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .error-msg {
     padding-top: 20px;
     text-align: center;

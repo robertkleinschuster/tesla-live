@@ -51,6 +51,8 @@ export default class VehicleDataFactory {
         vehicleData.fastCharger = dataMap.charge_state.fast_charger_brand;
         vehicleData.fastChargerPresent = dataMap.charge_state.fast_charger_present;
         vehicleData.fastChargerType = dataMap.charge_state.fast_charger_type;
+        vehicleData.insideTemp = dataMap.climate_state.inside_temp;
+        vehicleData.outsideTemp = dataMap.climate_state.outside_temp;
       } catch (e) {
         vehicleData.error = true;
       }
