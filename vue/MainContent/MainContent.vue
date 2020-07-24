@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="content">
     <h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1>
-    <Error v-if="vehicleData.error"></Error>
+    <ErrorMessage v-if="vehicleData.error"></ErrorMessage>
 
     <div class="row">
       <div class="column" id="current-data">
@@ -131,7 +131,7 @@
   import {faRoute} from "@fortawesome/free-solid-svg-icons";
   import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
   import {mapActions, mapGetters} from "vuex";
-  import Error from "./Error.vue";
+  import ErrorMessage from "./ErrorMessage.vue";
 
   library.add(faBolt)
   library.add(faTachometerAlt)
@@ -140,13 +140,16 @@
 
   export default {
     name: "MainContent",
-    components: {Error},
+    components: {ErrorMessage},
     methods: {
       ...mapActions(["fetchVehicleData"]),
     },
     computed: mapGetters(['vehicleData']),
     created() {
       this.fetchVehicleData();
+      setInterval(function () {
+        this.fetchVehicleData();
+      }.bind(this), 10000);
     },
     data: function () {
       return {
