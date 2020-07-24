@@ -29,9 +29,29 @@ export default class VehicleDataFactory {
   {
     let dataMap = await this.vehicleDataFinder.findVehicleData();
     let vehicleData = this.createEmptyVehicleData();
-    vehicleData.displayName = dataMap.display_name;
-    vehicleData.chargePower = dataMap.charger_power;
-    vehicleData.odometer = dataMap.vehicle_state.odometer;
+
+    if (dataMap.error) {
+      vehicleData.error = true;
+    } else {
+      vehicleData.displayName = dataMap.display_name;
+      vehicleData.odometer = dataMap.vehicle_state.odometer;
+      vehicleData.onlineState = dataMap.state;
+      vehicleData.speed = dataMap.drive_state.speed;
+      vehicleData.batteryPercent = dataMap.vehicle_state.usable_battery_level;
+      vehicleData.batteryRange = dataMap.vehicle_state.est_battery_range;
+      vehicleData.locationLatitude = dataMap.drive_state.latitude;
+      vehicleData.locationLongitute = dataMap.drive_state.longitude;
+      vehicleData.lastUpdate = dataMap.drive_state.timestamp;
+      vehicleData.chargePower = dataMap.charge_state.charger_power;
+      vehicleData.chargeState = dataMap.charge_state.charging_state;
+      vehicleData.chargeRate = dataMap.charge_state.charge_rate;
+      vehicleData.fullyChargedIn = dataMap.charge_state.minutes_to_full_charge;
+      vehicleData.fastCharger = dataMap.charge_state.fast_charger_brand;
+      vehicleData.fastChargerPresent = dataMap.charge_state.fast_charger_present;
+      vehicleData.fastChargerType = dataMap.charge_state.fast_charger_type;
+      console.log(vehicleData.batteryPercent);
+    }
+
 
     console.log(dataMap);
     return vehicleData;

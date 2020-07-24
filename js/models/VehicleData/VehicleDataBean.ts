@@ -1,22 +1,96 @@
 export default class VehicleDataBean {
+
+  private _error: boolean;
+
   private _displayName: string;
   private _odometer: number;
   private _range: number;
   private _speed: number;
+  private _power: number;
   private _consumption: number;
   private _onlineState: string;
   private _chargeState: string;
   private _charging: string;
   private _chargePower: string;
+  private _chargeRate: string;
   private _outsideTemp: string;
   private _insideTemp: string;
   private _fastCharger: string;
   private _fastChargerType: string;
+  private _fastChargerPresent: string;
   private _fullyChargedIn: string;
   private _lastUpdate: string
-  private location: {
-    latitude: number,
-    longitute: number
+
+  private _locationLatitude: string;
+  private _locationLongitute: string;
+
+  private _batteryPercent: number;
+  private _batteryRange: number;
+
+
+  get error(): boolean {
+    return this._error;
+  }
+
+  set error(value: boolean) {
+    this._error = value;
+  }
+
+  get locationLongitute(): string {
+    return this._locationLongitute;
+  }
+
+  set locationLongitute(value: string) {
+    this._locationLongitute = value;
+  }
+
+  get locationLatitude(): string {
+    return this._locationLatitude;
+  }
+
+  set locationLatitude(value: string) {
+    this._locationLatitude = value;
+  }
+
+
+  get batteryPercent(): number {
+    return this._batteryPercent;
+  }
+
+  set batteryPercent(value: number) {
+    this._batteryPercent = value;
+  }
+
+  get batteryRange(): number {
+    return this._batteryRange;
+  }
+
+  set batteryRange(value: number) {
+    this._batteryRange = value;
+  }
+
+  get chargeRate(): string {
+    return this._chargeRate;
+  }
+
+  set chargeRate(value: string) {
+    this._chargeRate = value;
+  }
+
+  get power(): number {
+    return this._power;
+  }
+
+  set power(value: number) {
+    this._power = value;
+  }
+
+  get fastChargerPresent(): string {
+    return this._fastChargerPresent;
+  }
+
+  set fastChargerPresent(value: string) {
+    this._fastChargerPresent = value;
   }
 
 

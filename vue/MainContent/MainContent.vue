@@ -1,6 +1,8 @@
 <template lang="html">
   <div id="content">
     <h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1>
+    <Error v-if="vehicleData.error"></Error>
+
     <div class="row">
       <div class="column" id="current-data">
         <div class="row">
@@ -19,8 +21,8 @@
           </div>
           <div class="column">
             <div class="battery">
-              <div :style="'width: ' + batteryPercent*1.5" class="battery-level">
-                <div class="battery-label">{{ availableRange }}</div>
+              <div :style="'width: ' + vehicleData.batteryPercent*1.5" class="battery-level">
+                <div class="battery-label">{{ vehicleData.batteryRange }}</div>
               </div>
             </div>
           </div>
@@ -32,7 +34,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'tachometer-alt']"></font-awesome-icon>
-            {{ currentSpeed }}
+            {{ vehicleData.speed }}
           </div>
         </div>
         <div class="row">
@@ -41,7 +43,7 @@
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
             <font-awesome-icon :icon="['fas', 'bolt']"></font-awesome-icon>
-            {{ currentWattage }}
+            {{ vehicleData.power }}
           </div>
         </div>
         <div class="row">
@@ -50,36 +52,28 @@
               <tbody>
               <tr>
                 <td>Status:</td>
-                <td id="vehicle_state"></td>
-              </tr>
-              <tr>
-                <td>Ladung:</td>
-                <td id="battery_level"></td>
-              </tr>
-              <tr>
-                <td>Reichweite:</td>
-                <td id="ideal_battery_range"></td>
+                <td id="vehicle_state">{{ vehicleData.onlineState }}</td>
               </tr>
               <tr>
                 <td>Ladestatus:</td>
-                <td id="charging_state"></td>
+                <td id="charging_state">{{ vehicleData.chargeState }}</td>
               </tr>
               <tr id="charge_rate">
                 <td>Lädt:</td>
-                <td></td>
+                <td>{{ vehicleData.chargeRate }}</td>
 
               </tr>
               <tr>
                 <td>Ladeleistung:</td>
-                <td id="charger_power"></td>
+                <td id="charger_power">{{ vehicleData.chargePower }}</td>
               </tr>
               <tr>
                 <td>Außentemperatur:</td>
-                <td id="outside_temp"></td>
+                <td id="outside_temp">{{ vehicleData.outsideTemp }}</td>
               </tr>
               <tr>
                 <td>Innentemperatur:</td>
-                <td id="inside_temp"></td>
+                <td id="inside_temp">{{ vehicleData.insideTemp }}</td>
               </tr>
 
 
@@ -93,23 +87,21 @@
           <div class="column">
             <table>
               <tbody>
-              <tr>
+              <tr v-if="vehicleData.fastChargerPresent">
                 <td>Fast Charger:</td>
-                <td></td>
+                <td>{{ vehicleData.fastCharger}}</td>
               </tr>
-              <tr>
+              <tr v-if="vehicleData.fastChargerPresent">
                 <td>Fast Charger Type:</td>
-                <td></td>
+                <td>{{ vehicleData.fastChargerType }}</td>
               </tr>
 
               <tr id="time_to_full_charge">
                 <td>Voll geladen in:</td>
-                <td></td>
+                <td>{{ vehicleData.fullyChargedIn }}</td>
               </tr>
               </tbody>
             </table>
-
-
           </div>
         </div>
       </div>
@@ -139,6 +131,7 @@
   import {faRoute} from "@fortawesome/free-solid-svg-icons";
   import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
   import {mapActions, mapGetters} from "vuex";
+  import Error from "./Error.vue";
 
   library.add(faBolt)
   library.add(faTachometerAlt)
@@ -147,6 +140,7 @@
 
   export default {
     name: "MainContent",
+    components: {Error},
     methods: {
       ...mapActions(["fetchVehicleData"]),
     },

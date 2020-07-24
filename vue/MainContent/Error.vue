@@ -1,5 +1,7 @@
 <template>
-
+<div>
+  Fehler
+</div>
 </template>
 
 <script>
