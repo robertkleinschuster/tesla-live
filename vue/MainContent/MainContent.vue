@@ -21,7 +21,7 @@
           </div>
           <div class="column">
             <div class="battery">
-              <div :style="'width: ' + vehicleData.batteryPercent*1.5" class="battery-level">
+              <div :style="{ width: vehicleData.batteryPercent * 1.5 + 'px' }" class="battery-level">
                 <div class="battery-label">{{ vehicleData.batteryRange }}</div>
               </div>
             </div>

@@ -37,8 +37,9 @@ export default class VehicleDataFactory {
       vehicleData.odometer = dataMap.vehicle_state.odometer;
       vehicleData.onlineState = dataMap.state;
       vehicleData.speed = dataMap.drive_state.speed;
-      vehicleData.batteryPercent = dataMap.vehicle_state.usable_battery_level;
-      vehicleData.batteryRange = dataMap.vehicle_state.est_battery_range;
+      vehicleData.power = dataMap.drive_state.power;
+      vehicleData.batteryPercent = dataMap.charge_state.usable_battery_level;
+      vehicleData.batteryRange = dataMap.charge_state.est_battery_range;
       vehicleData.locationLatitude = dataMap.drive_state.latitude;
       vehicleData.locationLongitute = dataMap.drive_state.longitude;
       vehicleData.lastUpdate = dataMap.drive_state.timestamp;
@@ -49,7 +50,6 @@ export default class VehicleDataFactory {
       vehicleData.fastCharger = dataMap.charge_state.fast_charger_brand;
       vehicleData.fastChargerPresent = dataMap.charge_state.fast_charger_present;
       vehicleData.fastChargerType = dataMap.charge_state.fast_charger_type;
-      console.log(vehicleData.batteryPercent);
     }
 
 
