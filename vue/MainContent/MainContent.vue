@@ -112,9 +112,18 @@
 
           </div>
         </div>
-        <div id="map"></div>
+        <Map :mapConfig="mapConfig"
+             apiKey="AIzaSyA46qetiSpEjyvwwR3eJ6opiJ62Dw-yGHU"></Map>
+        <template slot-scope="{ google, map }">
+          <MapMarker
+            v-for="marker in markers"
+            :key="marker.id"
+            :marker="marker"
+            :google="google"
+            :map="map"
+          ></MapMarker>
+        </template>
       </div>
-
     </div>
 
   </div>
@@ -129,6 +138,9 @@
   import {mapActions, mapGetters} from "vuex";
   import ErrorMessage from "./ErrorMessage.vue";
   import Battery from "./Battery.vue";
+  import Map from "./Map.vue";
+  import MapMarker from "./MapMarker.vue";
+
 
   library.add(faBolt)
   library.add(faTachometerAlt)
@@ -137,11 +149,28 @@
 
   export default {
     name: "MainContent",
-    components: {Battery, ErrorMessage},
+    components: {MapMarker, Map, Battery, ErrorMessage},
     methods: {
       ...mapActions(["fetchVehicleData"]),
     },
-    computed: mapGetters(['vehicleData']),
+    computed: {
+      ...mapGetters(['vehicleData']),
+      mapConfig () {
+        return {
+          zoom: 13,
+          center: this.mapCenter
+        }
+      },
+      mapCenter () {
+        return {
+          lat: this.vehicleData.locationLatitude,
+          lng: this.vehicleData.locationLongitute
+        }
+      },
+      markers() {return [
+        {id: 'nicemobil', position: {lat: this.vehicleData.locationLatitude, lng: this.vehicleData.locationLongitute}},
+      ]},
+    },
     created() {
       this.fetchVehicleData();
       setInterval(function () {

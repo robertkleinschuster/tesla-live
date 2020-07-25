@@ -15,7 +15,6 @@ library.add(faUserSecret);
 
 Vue.use(VueUnits);
 Vue.use(VueFilterDateFormat);
-
 numeral.locale('de');
 
 Vue.filter('numFormat', numFormat(numeral));

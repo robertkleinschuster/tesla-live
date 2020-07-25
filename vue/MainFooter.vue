@@ -2,7 +2,7 @@
   <footer>
     <div class="row">
       <div id="last-refresh" class="column">
-        Aktualisiert: {{ new Date(vehicleData.lastUpdate) | dateFormat('DD.MM.YYYY hh:mm:ss') }}
+        Aktualisiert: {{ new Date(vehicleData.lastUpdate) | dateFormat('DD.MM.YYYY HH:mm:ss') }}
       </div>
     </div>
   </footer>
