@@ -15,10 +15,10 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          MAPS_KEY: ${{ secrets.MAPS_KEY }}
-          SHARE_LINK: ${{ secrets.FACEBOOK_LINK }}
-          BACK_LINK: ${{ secrets.BACK_LINK }}
-          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          envkey_MAPS_KEY: ${{ secrets.MAPS_KEY }}
+          envkey_SHARE_LINK: ${{ secrets.FACEBOOK_LINK }}
+          envkey_BACK_LINK: ${{ secrets.BACK_LINK }}
+          envkey_BACKEND_URL: ${{ secrets.BACKEND_URL }}
           file_name: .env
       - name: Dependencies
         run: npm install
