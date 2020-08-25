@@ -106,23 +106,18 @@
         <div class="row">
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
             <font-awesome-icon :icon="['fas', 'map-marked-alt']"></font-awesome-icon>
-
           </div>
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-
           </div>
         </div>
-        <Map :mapConfig="mapConfig"
-             apiKey="AIzaSyA46qetiSpEjyvwwR3eJ6opiJ62Dw-yGHU"></Map>
-        <template slot-scope="{ google, map }">
-          <MapMarker
-            v-for="marker in markers"
-            :key="marker.id"
-            :marker="marker"
-            :google="google"
-            :map="map"
-          ></MapMarker>
-        </template>
+        <gmap-map :center="{lat: vehicleData.locationLatitude, lng: vehicleData.locationLongitute}" :zoom="13" class="map">
+          <gmap-marker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            @click="center=m.position"
+          ></gmap-marker>
+        </gmap-map>
       </div>
     </div>
 
@@ -138,8 +133,6 @@
   import {mapActions, mapGetters} from "vuex";
   import ErrorMessage from "./ErrorMessage.vue";
   import Battery from "./Battery.vue";
-  import Map from "./Map.vue";
-  import MapMarker from "./MapMarker.vue";
 
 
   library.add(faBolt)
@@ -149,27 +142,12 @@
 
   export default {
     name: "MainContent",
-    components: {MapMarker, Map, Battery, ErrorMessage},
+    components: {Battery, ErrorMessage},
     methods: {
       ...mapActions(["fetchVehicleData"]),
     },
     computed: {
-      ...mapGetters(['vehicleData']),
-      mapConfig () {
-        return {
-          zoom: 13,
-          center: this.mapCenter
-        }
-      },
-      mapCenter () {
-        return {
-          lat: this.vehicleData.locationLatitude,
-          lng: this.vehicleData.locationLongitute
-        }
-      },
-      markers() {return [
-        {id: 'nicemobil', position: {lat: this.vehicleData.locationLatitude, lng: this.vehicleData.locationLongitute}},
-      ]},
+      ...mapGetters(['vehicleData', 'mapConfig', 'markers']),
     },
     created() {
       this.fetchVehicleData();
@@ -227,5 +205,10 @@
 
   .show-small {
     display: none;
+  }
+
+  .map {
+    height: 60vh;
+    margin-top: 20px;
   }
 </style>

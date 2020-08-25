@@ -25,7 +25,6 @@
         backLinkLabel: "Zurück",
         shareLink: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flive.sonice.at%2F&amp;src=sdkpreparse",
         shareButtonLabel: "Teilen",
-
       }
     }
   }

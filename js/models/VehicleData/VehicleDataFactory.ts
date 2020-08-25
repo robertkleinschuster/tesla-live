@@ -41,8 +41,8 @@ export default class VehicleDataFactory {
         vehicleData.power = dataMap.drive_state.power;
         vehicleData.batteryPercent = dataMap.charge_state.usable_battery_level;
         vehicleData.batteryRange = dataMap.charge_state.est_battery_range;
-        vehicleData.locationLatitude = dataMap.drive_state.latitude;
-        vehicleData.locationLongitute = dataMap.drive_state.longitude;
+        vehicleData.locationLatitude = parseFloat(dataMap.drive_state.latitude);
+        vehicleData.locationLongitute = parseFloat(dataMap.drive_state.longitude);
         vehicleData.lastUpdate = dataMap.drive_state.timestamp;
         vehicleData.chargePower = dataMap.charge_state.charger_power;
         vehicleData.chargeState = dataMap.charge_state.charging_state;

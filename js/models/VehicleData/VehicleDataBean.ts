@@ -21,8 +21,8 @@ export default class VehicleDataBean {
   private _fullyChargedIn: string;
   private _lastUpdate: string
 
-  private _locationLatitude: string;
-  private _locationLongitute: string;
+  private _locationLatitude: number = 0;
+  private _locationLongitute: number = 0;
 
   private _batteryPercent: number;
   private _batteryRange: number;
@@ -36,19 +36,19 @@ export default class VehicleDataBean {
     this._error = value;
   }
 
-  get locationLongitute(): string {
+  get locationLongitute(): number {
     return this._locationLongitute;
   }
 
-  set locationLongitute(value: string) {
+  set locationLongitute(value: number) {
     this._locationLongitute = value;
   }
 
-  get locationLatitude(): string {
+  get locationLatitude(): number {
     return this._locationLatitude;
   }
 
-  set locationLatitude(value: string) {
+  set locationLatitude(value: number) {
     this._locationLatitude = value;
   }
 

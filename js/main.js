@@ -6,6 +6,7 @@ import numeral from 'numeral';
 import "numeral/locales/de";
 import numFormat from 'vue-filter-number-format';
 import VueFilterDateFormat from 'vue-filter-date-format';
+import * as VueGoogleMaps from "vue2-google-maps";
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +21,13 @@ numeral.locale('de');
 Vue.filter('numFormat', numFormat(numeral));
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "",
+    libraries: "places" // necessary for places input
+  }
+});
 
 /**
  * Vue filter to round the decimal to the given place.

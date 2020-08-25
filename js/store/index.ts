@@ -10,7 +10,21 @@ export default new Vuex.Store({
     vehicleData: new VehicleDataFactory().createEmptyVehicleData()
   },
   getters: {
-    vehicleData: (state) : VehicleDataBean => state.vehicleData
+    vehicleData: (state) : VehicleDataBean => state.vehicleData,
+    mapConfig: (state) : Object =>  {
+     return {
+       zoom: 13,
+       center: {
+         lat: state.vehicleData.locationLatitude,
+         lng: state.vehicleData.locationLongitute
+       }
+     };
+    },
+    markers: (state) : Object => {
+      return [
+        {id: 'nicemobil', position: {lat: state.vehicleData.locationLatitude, lng: state.vehicleData.locationLongitute}},
+      ]
+    }
   },
   actions: {
     async fetchVehicleData({ commit })
