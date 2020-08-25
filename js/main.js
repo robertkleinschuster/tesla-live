@@ -18,13 +18,14 @@ Vue.use(VueUnits);
 Vue.use(VueFilterDateFormat);
 numeral.locale('de');
 
+
 Vue.filter('numFormat', numFormat(numeral));
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "",
+    key: process.env.MAPS_KEY,
     libraries: "places" // necessary for places input
   }
 });

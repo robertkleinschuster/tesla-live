@@ -21,9 +21,9 @@
     name: "MainHeader",
     data: function () {
       return {
-        backLink: "",
+        backLink: process.env.BACK_LINK,
         backLinkLabel: "Zurück",
-        shareLink: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flive.sonice.at%2F&amp;src=sdkpreparse",
+        shareLink: process.env.SHARE_LINK,
         shareButtonLabel: "Teilen",
       }
     }

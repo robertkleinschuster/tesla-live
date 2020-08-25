@@ -7,7 +7,7 @@ export default class VehicleDataFactory {
 
   constructor(vehicleDataFinder: VehicleDataFinder = null) {
     if (vehicleDataFinder === null) {
-      this._vehicleDataFinder = new VehicleDataFinder("https://live.sonice.at/vehicle_data.php");
+      this._vehicleDataFinder = new VehicleDataFinder(process.env.BACKEND_URL);
     }
   }
 
