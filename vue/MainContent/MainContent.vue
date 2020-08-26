@@ -1,6 +1,7 @@
 <template lang="html">
   <div id="content">
     <h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1>
+    <vue-headful :title="vehicleData.displayName"></vue-headful>
     <ErrorMessage v-if="vehicleData.error"></ErrorMessage>
 
     <div class="row">

@@ -17,12 +17,12 @@
     "since 2017-06"
   ],
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.1.2",
+    "@vue/component-compiler-utils": "^3.2.0",
     "parcel-bundler": "^1.12.4",
     "pug": "^3.0.0",
     "sass": "^1.26.10",
     "typescript": "^3.9.7",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -30,9 +30,10 @@
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.19.2",
     "numeral": "^2.0.6",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-filter-date-format": "^1.3.1",
     "vue-filter-number-format": "^3.0.1",
+    "vue-headful": "^2.1.0",
     "vue-hot-reload-api": "^2.3.4",
     "vue-units": "^1.0.4",
     "vue2-google-maps": "^0.10.7",

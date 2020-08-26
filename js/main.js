@@ -7,6 +7,9 @@ import "numeral/locales/de";
 import numFormat from 'vue-filter-number-format';
 import VueFilterDateFormat from 'vue-filter-date-format';
 import * as VueGoogleMaps from "vue2-google-maps";
+import vueHeadful from 'vue-headful';
+
+Vue.component('vue-headful', vueHeadful);
 
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons'
@@ -54,3 +57,11 @@ new Vue({
   store: store,
   render: createElement => createElement(App)
 }).$mount('#app');
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
