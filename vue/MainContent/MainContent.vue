@@ -66,11 +66,11 @@
               </tr>
               <tr v-if="vehicleData.outsideTemp">
                 <td>Außentemperatur:</td>
-                <td id="outside_temp">{{ vehicleData.outsideTemp }}</td>
+                <td id="outside_temp">{{ vehicleData.outsideTemp }} °C</td>
               </tr>
               <tr v-if="vehicleData.insideTemp">
                 <td>Innentemperatur:</td>
-                <td id="inside_temp">{{ vehicleData.insideTemp }}</td>
+                <td id="inside_temp">{{ vehicleData.insideTemp }} °C</td>
               </tr>
 
 
