@@ -3,6 +3,13 @@
     <div id="top-nav"><a :href="backLink">
       <font-awesome-icon :icon="['fas', 'arrow-circle-left']"></font-awesome-icon>
       {{ backLinkLabel }}</a>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v3.2';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
       <div class="fb-share-button" style="width: 70px; float: right;" data-href="https://live.sonice.at"
            data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" :href="shareLink"
                                                                                      class="fb-xfbml-parse-ignore">{{
