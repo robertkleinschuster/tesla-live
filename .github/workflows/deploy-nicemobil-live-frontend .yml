@@ -21,8 +21,6 @@ jobs:
           envkey_BACKEND_URL: ${{ secrets.BACKEND_URL }}
           file_name: .env
       - name: Dependencies
-        run: cat .env
-      - name: Dependencies
         run: npm install
       - name: Build
         run: npm run build
