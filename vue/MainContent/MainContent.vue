@@ -108,7 +108,7 @@
           <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
             <font-awesome-icon :icon="['fas', 'map-marked-alt']"></font-awesome-icon>
           </div>
-          <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
+          <div class="column" style="font-size: 25px; margin-top: 0; margin-bottom: 0">
           </div>
         </div>
         <gmap-map :center="{lat: vehicleData.locationLatitude, lng: vehicleData.locationLongitute}" :zoom="13" class="map">
