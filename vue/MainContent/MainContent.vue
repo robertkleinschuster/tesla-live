@@ -1,116 +1,75 @@
 <template lang="html">
   <div id="content">
-    <h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1>
+    <div class="headline"><h1 v-if="vehicleData.displayName">{{ vehicleData.displayName}}</h1></div>
     <vue-headful :title="vehicleData.displayName"></vue-headful>
     <ErrorMessage v-if="vehicleData.error"></ErrorMessage>
 
     <div class="row">
-      <div class="column" id="current-data">
-        <div class="row">
-          <div class="column hidden-small" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-            Kilometerstand:
-          </div>
-          <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
-            <font-awesome-icon :icon="['fas', 'route']"></font-awesome-icon>
-            {{ vehicleData.odometer | units('mi', 'km', false) | round(0) | numFormat }} km
-          </div>
-        </div>
+      <div class="column">
 
-        <div class="row">
-          <div class="column hidden-small" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-            Reichweite:
+
+        <div class="icon-group-list">
+          <div class="icon-group">
+            <font-awesome-icon class="icon" :icon="['fas', 'route']"></font-awesome-icon>
+            <p>{{ vehicleData.odometer | units('mi', 'km', false) | round(0) | numFormat }} km</p>
           </div>
-          <div class="column">
-            <Battery></Battery>
+          <div class="icon-group">
+            <font-awesome-icon class="icon" :icon="['fas', 'tachometer-alt']"></font-awesome-icon>
+            <p>{{ vehicleData.speed | units('mi', 'km', false) | round(0) | numFormat }} km/h</p>
+          </div>
+          <div class="icon-group">
+            <font-awesome-icon class="icon" :icon="['fa', 'bolt']"></font-awesome-icon>
+            <p>{{ vehicleData.power | round(0) }} kW</p>
           </div>
         </div>
+        <Battery class="battery"></Battery>
 
-        <div class="row">
-          <div class="column hidden-small" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-            Geschwindigkeit:
-          </div>
-          <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
-            <font-awesome-icon :icon="['fas', 'tachometer-alt']"></font-awesome-icon>
-            {{ vehicleData.speed | units('mi', 'km', false) | round(0) | numFormat }} km/h
-          </div>
-        </div>
-        <div class="row">
-          <div class="column hidden-small" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-            Verbrauch:
-          </div>
-          <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto; text-align: center;">
-            <font-awesome-icon :icon="['fas', 'bolt']"></font-awesome-icon>
-            {{ vehicleData.power | round(0) }} kW
-          </div>
-        </div>
-        <div class="row">
-          <div class="column">
-            <table>
-              <tbody>
-              <tr>
-                <td>Status:</td>
-                <td id="vehicle_state">{{ vehicleData.onlineState }}</td>
-              </tr>
-              <tr v-if="vehicleData.chargeState">
-                <td>Ladestatus:</td>
-                <td id="charging_state">{{ vehicleData.chargeState }}</td>
-              </tr>
-              <tr id="charge_rate" v-if="vehicleData.chargeRate">
-                <td>Lädt:</td>
-                <td>{{ vehicleData.chargeRate | units('mi', 'km', false) | round(0) | numFormat}} km/h</td>
+     <!--   <button class="show-more" v-on="">+</button> -->
 
-              </tr>
-              <tr v-if="vehicleData.chargePower">
-                <td>Ladeleistung:</td>
-                <td id="charger_power">{{ vehicleData.chargePower | round(0)}} kW</td>
-              </tr>
-              <tr v-if="vehicleData.outsideTemp">
-                <td>Außentemperatur:</td>
-                <td id="outside_temp">{{ vehicleData.outsideTemp }} °C</td>
-              </tr>
-              <tr v-if="vehicleData.insideTemp">
-                <td>Innentemperatur:</td>
-                <td id="inside_temp">{{ vehicleData.insideTemp }} °C</td>
-              </tr>
+        <table class="detail-table ">
+          <tbody>
+          <tr>
+            <td>Status:</td>
+            <td>{{ vehicleData.onlineState }}</td>
+          </tr>
+          <tr v-if="vehicleData.chargeState">
+            <td>Ladestatus:</td>
+            <td>{{ vehicleData.chargeState }}</td>
+          </tr>
+          <tr v-if="vehicleData.chargeRate">
+            <td>Lädt:</td>
+            <td>{{ vehicleData.chargeRate | units('mi', 'km', false) | round(0) | numFormat}} km/h</td>
+          </tr>
+          <tr v-if="vehicleData.fastChargerPresent">
+            <td>Fast Charger:</td>
+            <td>{{ vehicleData.fastCharger}}</td>
+          </tr>
+          <tr v-if="vehicleData.fastChargerPresent">
+            <td>Fast Charger Type:</td>
+            <td>{{ vehicleData.fastChargerType }}</td>
+          </tr>
+          <tr v-if="vehicleData.fullyChargedIn">
+            <td>Voll geladen in:</td>
+            <td>{{ vehicleData.fullyChargedIn }} min</td>
+          </tr>
 
-
-              </tbody>
-            </table>
-
-
-          </div>
-
-
-          <div class="column">
-            <table>
-              <tbody>
-              <tr v-if="vehicleData.fastChargerPresent">
-                <td>Fast Charger:</td>
-                <td>{{ vehicleData.fastCharger}}</td>
-              </tr>
-              <tr v-if="vehicleData.fastChargerPresent">
-                <td>Fast Charger Type:</td>
-                <td>{{ vehicleData.fastChargerType }}</td>
-              </tr>
-
-              <tr id="time_to_full_charge" v-if="vehicleData.fullyChargedIn">
-                <td>Voll geladen in:</td>
-                <td>{{ vehicleData.fullyChargedIn }} min</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <tr v-if="vehicleData.chargePower">
+            <td>Ladeleistung:</td>
+            <td>{{ vehicleData.chargePower | round(0)}} kW</td>
+          </tr>
+          <tr v-if="vehicleData.outsideTemp">
+            <td>Außentemperatur:</td>
+            <td>{{ vehicleData.outsideTemp }} °C</td>
+          </tr>
+          <tr v-if="vehicleData.insideTemp">
+            <td>Innentemperatur:</td>
+            <td>{{ vehicleData.insideTemp }} °C</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="column">
-        <div class="row">
-          <div class="column" style="font-size: 25px; margin-top: auto; margin-bottom: auto">
-            <font-awesome-icon :icon="['fas', 'map-marked-alt']"></font-awesome-icon>
-          </div>
-          <div class="column" style="font-size: 25px; margin-top: 0; margin-bottom: 0">
-          </div>
-        </div>
         <gmap-map :center="{lat: vehicleData.locationLatitude, lng: vehicleData.locationLongitute}" :zoom="13" class="map">
           <gmap-marker
             :key="index"
@@ -121,8 +80,6 @@
         </gmap-map>
       </div>
     </div>
-
-  </div>
 </template>
 
 <script lang="ts">
@@ -135,11 +92,12 @@
   import ErrorMessage from "./ErrorMessage.vue";
   import Battery from "./Battery.vue";
 
-
   library.add(faBolt)
   library.add(faTachometerAlt)
   library.add(faRoute)
   library.add(faMapMarkedAlt)
+
+
 
   export default {
     name: "MainContent",
@@ -160,8 +118,44 @@
 </script>
 
 <style lang="scss" scoped>
+  h1 {
+    margin-bottom: 40px;
+  }
+
   #content {
     margin: 20px 20px 0;
+    font-size: 25px;
+  }
+
+  .icon-group-list {
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  .icon-group {
+    flex: 33%;
+    text-align: center;
+    #border: #565656 solid 1px;
+    border-radius: 50px;
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .icon-group > p {
+    margin: 0;
+  }
+
+  .map-icon {
+    font-size: 50px;
+  }
+
+  .icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+
+  .headline {
+    text-align: center;
   }
 
   .row {
@@ -176,22 +170,68 @@
     flex: 50%;
   }
 
-  .left {
-    width: 25%;
+  .detail-table {
+    font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
   }
 
-  .right {
-    width: 75%;
+  .battery {
+    margin-bottom: 50px;
   }
 
-  @media screen and (max-width: 900px) {
+  .show-more {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .icon-group-list {
+      display: inline;
+    }
+  }
+
+  @media screen and (max-width: 1366px) {
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .battery {
+      margin-bottom: 25px;
+    }
+
+
+    .icon-group {
+      border: 0;
+    }
+
+    .show-more {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 50px;
+      border: 0;
+      font-size: 40px;
+      padding: 5px 15px 10px 15px;
+      background: #bbbbbb;
+    }
+
+    .show-more:active {
+      background-color: #5c5c5c;
+      color: black;
+    }
+
+    .detail-table {
+      margin-bottom: 0px;
+    }
+
     .row {
       display: inline;
     }
 
     .column {
       padding-bottom: 20px;
-
     }
 
     .hidden-small {
@@ -209,7 +249,7 @@
   }
 
   .map {
-    height: 60vh;
+    height: 70vh;
     margin-top: 20px;
   }
 </style>

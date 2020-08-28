@@ -3,8 +3,8 @@
     <div id="top-nav"><a :href="backLink">
       <font-awesome-icon :icon="['fas', 'arrow-circle-left']"></font-awesome-icon>
       {{ backLinkLabel }}</a>
-      <div class="fb-share-button" style="width: 70px; float: right;" data-href="https://live.sonice.at"
-           data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" :href="shareLink"
+      <div class="fb-share-button" data-href="https://live.sonice.at"
+           data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" :href="shareLink"
                                                                                      class="fb-xfbml-parse-ignore">{{
         shareButtonLabel }}</a></div>
     </div>
@@ -36,10 +36,12 @@
     padding: 20px;
     border-bottom: #565656 solid 1px;
     font-weight: 400;
+    padding-bottom: 25px;
   }
 
   .fb-share-button {
     margin-left: 20px;
+    float: right;
   }
 
 </style>
