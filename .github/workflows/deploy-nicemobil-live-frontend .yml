@@ -27,9 +27,9 @@ jobs:
       - name: Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          username: 'lipo'
+          username: 'live_sonice_at'
           server: '${{ secrets.NICEMOBIL_DOMAIN }}'
           ssh_private_key: '${{ secrets.NICEMOBIL_KEY }}'
           local_path: './dist/*'
-          remote_path: '/httpdocs/'
+          remote_path: '/tesla_data/httpdocs/'
           args: '-o ConnectTimeout=5'
