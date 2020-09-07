@@ -31,5 +31,5 @@ jobs:
           server: '${{ secrets.NICEMOBIL_DOMAIN }}'
           ssh_private_key: '${{ secrets.NICEMOBIL_KEY }}'
           local_path: './dist/*'
-          remote_path: '/home/lipo/web/live.sonice.at/public_html'
+          remote_path: '/httpdocs/'
           args: '-o ConnectTimeout=5'
